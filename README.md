@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark-cli.svg?branch=master)](https://travis-ci.com/qbicsoftware/spark-benchmark-cli)
+
 # spark-benchmark-cli
 Here, various expensive queries and operations for spark benchmarking are defined.
 
