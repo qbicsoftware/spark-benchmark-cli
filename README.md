@@ -13,3 +13,9 @@ Run it as usual:
 ```bash
 java -jar $name-assembly-$version.jar
 ```
+
+# Tests
+Run tests inside the sbt console using:
+```bash
+test
+```
