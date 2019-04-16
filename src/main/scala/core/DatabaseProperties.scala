@@ -1,4 +1,4 @@
-package database.core
+package core
 
 case class DatabaseProperties(jdbcURL: String,
                               user: String,
