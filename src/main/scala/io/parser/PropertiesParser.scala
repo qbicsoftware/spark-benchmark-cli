@@ -10,10 +10,10 @@ object PropertiesParser {
     val lines = Source.fromFile(propertiesFileName).getLines.toList
     val split = for (line <- lines) yield line.split(":")
 
-    // TODO Spaghetti Bolognese
-    val host = split.head(1)
+    // TODO Moms' Spaghetti Bolognese
+    var host = split.head(1) + ":" + split.head(2) + ":" + split.head(3)
       .filterNot((x: Char) => x.equals('\"'))
-      .filterNot((x: Char) => x.isWhitespace)
+    host = host.replaceAll("\\s", "")
     val port = split(1)(1)
       .filterNot((x: Char) => x.equals('\"'))
       .filterNot((x: Char) => x.isWhitespace)
