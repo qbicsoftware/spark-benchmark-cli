@@ -6,7 +6,7 @@ class CommandLineParser {
 
   def parseCommandLineParameters(args: Array[String]): CommandLineOptions = {
     if (args.isEmpty) {
-      CommandLine.usage(new CommandLineParser, System.out)
+      CommandLine.usage(new CommandLineOptions, System.out)
       System.exit(0)
     }
 
@@ -14,7 +14,7 @@ class CommandLineParser {
     new CommandLine(commandLineOptions).parse(args:_*)
 
     if (commandLineOptions.helpRequested) {
-      CommandLine.usage(new CommandLineParser, System.out)
+      CommandLine.usage(new CommandLineOptions, System.out)
       System.exit(0)
     }
 
