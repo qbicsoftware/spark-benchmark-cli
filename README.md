@@ -29,7 +29,7 @@ SQL Queries inside Spark!
 Required parameters are:
 ```
 -c, --config=<configFilePath>
--q
+-q, --query
 ```
 Queries are optionally interactive.
 You can either use ```-q``` to get a prompt for your query or supply a full query when running the tool: ```--q[=<sqlQuery>]```.
