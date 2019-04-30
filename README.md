@@ -21,10 +21,12 @@ java -jar spark-benchmark-cli-assembly-$version.jar
 Usage: Benchmark [-h] -q[=<sqlQuery>] -c=<configFilePath>
 Benchmark Tool for evaluating the performance of a Spark Cluster. Run custom
 SQL Queries inside Spark!
+  -s, --spark                run with spark support 
+  -l, --local                run spark in local mode - requires -s option to be in effect
+  -q, --query[=<sqlQuery>]   SQL query to execute
   -c, --config=<configFilePath>
                              database config file path
   -h, --help                 display a help message
-  -q, --query[=<sqlQuery>]   SQL query to execute
 ```
 Required parameters are:
 ```
@@ -38,8 +40,13 @@ You can either use ```-q``` to get a prompt for your query or supply a full quer
 A query can be submitted to spark via:
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -c /opt/spark-data/database_properties.txt -q "query"
+/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -c /opt/spark-data/database_properties.txt -s -t <table> -q <"query"> 
+```
 
+## Example Query
+```bash
+/spark/bin/spark-submit --master spark://spark-master:7077 \
+/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -s -l -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
 ## Tests
