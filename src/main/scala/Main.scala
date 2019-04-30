@@ -25,7 +25,7 @@ object Main {
           .builder()
           .appName("Spark Benchmark CLI")
           .config("spark.master", "local")
-          //      .config("spark.some.config.option", "some-value")
+          .config("spark.driver.extraClassPath", "/opt/spark-apps/spark-apps/mariadb-java-client-2.4.1.jar")
           .getOrCreate()
       } else {
         SparkSession
@@ -46,6 +46,7 @@ object Main {
       val connectionProperties = new Properties()
       connectionProperties.put("user", s"${databaseProperties.user}")
       connectionProperties.put("password", s"${databaseProperties.password}")
+      connectionProperties.put("driver", s"${commandLineParameters.databaseDriver}")
 
       val table = spark.read.jdbc(databaseProperties.jdbcURL, commandLineParameters.table, connectionProperties)
       table.printSchema()
@@ -57,28 +58,29 @@ object Main {
       table.createOrReplaceTempView(commandLineParameters.table)
 
       spark.sql(commandLineParameters.sqlQuery)
+    } else {
+      // RUNNING OUTSIDE SPARK
+      LOG.info("Spark support has been disabled!")
+
+      // connect
+      Class.forName("org.mariadb.jdbc.Driver")
+      val connection = DriverManager.getConnection(databaseProperties.jdbcURL, databaseProperties.user, databaseProperties.password)
+      connection.isClosed
+
+      // execute query
+      val statement = connection.createStatement()
+      val rs = statement.executeQuery(commandLineParameters.sqlQuery)
+
+      // print results
+      val list = Iterator.from(0).takeWhile(_ => rs.next()).map(_ => rs.getString(1)).toList
+      println(list)
+
+      while (rs.next()) {
+        println(rs.getString(1)) //or rs.getString("column name");
+      }
+
+      connection.isClosed
     }
 
-    // RUNNING OUTSIDE SPARK
-    LOG.info("Spark support has been disabled!")
-
-    // connect
-    Class.forName("org.mariadb.jdbc.Driver")
-    val connection = DriverManager.getConnection(databaseProperties.jdbcURL, databaseProperties.user, databaseProperties.password)
-    connection.isClosed
-
-    // execute query
-    val statement = connection.createStatement()
-    val rs = statement.executeQuery(commandLineParameters.sqlQuery)
-
-    // print results
-    val list = Iterator.from(0).takeWhile(_ => rs.next()).map(_ => rs.getString(1)).toList
-    println(list)
-
-    while (rs.next()) {
-      println(rs.getString(1)) //or rs.getString("column name");
-    }
-
-    connection.isClosed
   }
 }

@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/spark-benchmark-cli)
 
 # spark-benchmark-cli
-Here, various expensive queries and operations for spark benchmarking are defined.
+A tool for submitting SQL queries to a Spark Cluster. Various benchmarking statistics will be calculated.
 
 ## Building
 SBT assembly plugin is configured. Hence, in the project root:
@@ -40,13 +40,13 @@ You can either use ```-q``` to get a prompt for your query or supply a full quer
 A query can be submitted to spark via:
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -c /opt/spark-data/database_properties.txt -s -t <table> -q <"query"> 
+/opt/spark-apps/spark-benchmark-cli-assembly-0.1.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t <table> -q <"query"> 
 ```
 
 ## Example Query
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -s -l -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
+/opt/spark-apps/spark-benchmark-cli-assembly-0.1.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
 ## Tests

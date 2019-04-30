@@ -14,6 +14,10 @@ class CommandLineOptions {
     description = Array("Spark in local mode"))
   var localMode: Boolean = false
 
+  @Option(names = Array("-d", "--driver"),
+    description = Array("Database driver name"))
+  var databaseDriver: String = ""
+
   @Option(names = Array("-c", "--config"),
     description = Array("Database config file path."),
     required = true)
