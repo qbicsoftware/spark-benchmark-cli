@@ -20,7 +20,7 @@ class CommandLineOptions {
 
   @Option(names = Array("-h", "--help"),
     description = Array("display a help message"),
-    usageHelp = true,
+    usageHelp = true
   )
   var helpRequested = false
 }

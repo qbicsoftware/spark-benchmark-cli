@@ -34,6 +34,14 @@ Required parameters are:
 Queries are optionally interactive.
 You can either use ```-q``` to get a prompt for your query or supply a full query when running the tool: ```--q[=<sqlQuery>]```.
 
+## Spark
+A query can be submitted to spark via:
+```bash
+/spark/bin/spark-submit --master spark://spark-master:7077 \
+/opt/spark-apps/spark-benchmark-cli-assembly-0.1-2.12.jar -c /opt/spark-data/database_properties.txt -q "query"
+
+```
+
 ## Tests
 Run tests <b>inside the sbt console</b> from the root project directory using:
 ```bash

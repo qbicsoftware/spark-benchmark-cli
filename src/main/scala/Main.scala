@@ -6,6 +6,29 @@ import java.sql.DriverManager
 object Main {
 
   def main(args: Array[String]) {
+    // TODO add a spark version and a non spark version
+    // differ between them via CLI parameter
+
+    import org.apache.spark.sql.SparkSession
+
+    val spark = SparkSession
+      .builder()
+      .appName("Spark Benchmark CLI")
+      .config("spark.master", "local")
+//      .config("spark.some.config.option", "some-value")
+      .getOrCreate()
+
+    // For implicit conversions like converting RDDs to DataFrames
+    import spark.implicits._
+
+
+
+
+
+
+
+
+
     // parse commandline parameters, get database properties
     val commandLineParser = new CommandLineParser()
     val commandLineParameters = commandLineParser.parseCommandLineParameters(args)
