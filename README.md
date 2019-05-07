@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/spark-benchmark-cli)
 
 # spark-benchmark-cli
-A tool for submitting SQL queries to a Spark Cluster. Various benchmarking statistics will be calculated.
+A tool for submitting SQL queries to a Spark Cluster. Various benchmarking statistics will be calculated.    
+Currently MariaDB is supported out of the box.
 
 ## Building
 SBT assembly plugin is configured. Hence, in the project root:
@@ -23,8 +24,10 @@ Benchmark Tool for evaluating the performance of a Spark Cluster. Run custom
 SQL Queries inside Spark!
   -s, --spark                run with spark support 
   -l, --local                run spark in local mode - requires -s option to be in effect
+  -t, --table[=<table>]      table to execute SQL query in, mandatory if running with spark support
+  -d, --driver[=<driver>]    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory if running with spark support 
   -q, --query[=<sqlQuery>]   SQL query to execute
-  -c, --config=<configFilePath>
+  -c, --config[=<configFilePath>]
                              database config file path
   -h, --help                 display a help message
 ```
@@ -54,3 +57,7 @@ Run tests <b>inside the sbt console</b> from the root project directory using:
 ```bash
 test
 ```
+
+## Known issues
+Due to a bug in the MariaDB connector and Spark, mariadb in the jdbc URL has to be replaced with mysql.    
+Please refer to: https://github.com/qbicsoftware/spark-benchmark-cli/issues/9 .
