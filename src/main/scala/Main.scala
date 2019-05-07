@@ -1,9 +1,12 @@
 import io.cli.CommandLineParser
 import io.parser.PropertiesParser
 import java.sql.DriverManager
-import org.apache.spark.sql.SparkSession
+
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import java.util.Properties
+
 import com.typesafe.scalalogging.Logger
+import org.apache.spark.{SparkConf, SparkContext}
 
 object Main {
 
@@ -50,14 +53,16 @@ object Main {
 
       val table = spark.read.jdbc(databaseProperties.jdbcURL, commandLineParameters.table, connectionProperties)
       table.printSchema()
+      table.show()
 
       // NOTE
       // Spark requires a View of a table to allow for SQL queries
       // CreateOrReplaceTempView will create a temporary view of the table in memory. It is not persistent at this moment but you can run sql query on top of that.
       // If you want to save it you can either persist or use saveAsTable to save.
-      table.createOrReplaceTempView(commandLineParameters.table)
-
-      spark.sql(commandLineParameters.sqlQuery)
+//      table.createOrReplaceTempView(commandLineParameters.table)
+//
+//      val result = spark.sql(commandLineParameters.sqlQuery)
+//      result.show(1)
     } else {
       // RUNNING OUTSIDE SPARK
       LOG.info("Spark support has been disabled!")
@@ -75,9 +80,9 @@ object Main {
       val list = Iterator.from(0).takeWhile(_ => rs.next()).map(_ => rs.getString(1)).toList
       println(list)
 
-      while (rs.next()) {
-        println(rs.getString(1)) //or rs.getString("column name");
-      }
+//      while (rs.next()) {
+//        println(rs.getString(1)) //or rs.getString("column name");
+//      }
 
       connection.isClosed
     }
