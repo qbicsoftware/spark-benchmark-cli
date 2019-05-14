@@ -16,3 +16,7 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 .idea
+
+# DB properties
+src/main/resources/database_properties.txt
+database_properties.txt
