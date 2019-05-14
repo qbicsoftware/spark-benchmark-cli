@@ -20,6 +20,3 @@ project/plugins/project/
 # DB properties
 src/main/resources/database_properties.txt
 database_properties.txt
-
-# misc
-dry.txt
