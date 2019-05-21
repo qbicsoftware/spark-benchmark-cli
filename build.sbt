@@ -22,3 +22,12 @@ assemblyMergeStrategy in assembly := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
 }
+
+// https://github.com/sbt/sbt-assembly
+// prepending a launch script
+// this is not yet working as expected!
+import sbtassembly.AssemblyPlugin.defaultUniversalScript
+
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultUniversalScript(shebang = false)))
+
+assemblyJarName in assembly := s"${name.value}-${version.value}"
