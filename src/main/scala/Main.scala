@@ -9,9 +9,17 @@ import com.typesafe.scalalogging.Logger
 
 object Main {
 
-  val LOG = Logger("Spark Benchmark CLI")
+  val LOG = Logger("scark-cli")
 
   def main(args: Array[String]) {
+    LOG.info(
+      """
+        |  _________                    __                    .__  .__
+        | /   _____/ ____ _____ _______|  | __           ____ |  | |__|
+        | \_____  \_/ ___\\__  \\_  __ \  |/ /  ______ _/ ___\|  | |  |
+        | /        \  \___ / __ \|  | \/    <  /_____/ \  \___|  |_|  |
+        |/_______  /\___  >____  /__|  |__|_ \          \___  >____/__|
+        |        \/     \/     \/           \/              \/         """.stripMargin)
     // parse commandline parameters, get database properties
     val commandLineParser = new CommandLineParser()
     val commandLineParameters = commandLineParser.parseCommandLineParameters(args)
@@ -32,16 +40,17 @@ object Main {
         val spark =
           if (commandLineParameters.localMode) {
             LOG.info("Running Spark in local mode!")
+            LOG.warn("scark-cli assumes that your mariadb-java-client jar is in /opt/spark-apps")
             SparkSession
               .builder()
               .appName("Spark Benchmark CLI")
               .config("spark.master", "local")
-              .config("spark.driver.extraClassPath", "/opt/spark-apps/spark-apps/mariadb-java-client-2.4.1.jar")
+              .config("spark.driver.extraClassPath", "/opt/spark-apps/mariadb-java-client-2.4.1.jar")
               .getOrCreate()
           } else {
             SparkSession
               .builder()
-              .appName("Spark Benchmark CLI")
+              .appName("scark-cli")
               //      .config("spark.some.config.option", "some-value")
               .getOrCreate()
           }
@@ -50,14 +59,11 @@ object Main {
 
         Class.forName("org.mariadb.jdbc.Driver")
 
-        // test database connection
+        // connect to the database
         try {
           val connection = DriverManager.getConnection(databaseProperties.jdbcURL, databaseProperties.user, databaseProperties.password)
-          if (!connection.isClosed) {
-            LOG.error("Connection to the database did not close automatically when performing a connection test!")
-          }
         } catch {
-          case e: Exception => LOG.error("Something went wrong when attempting to connect to the database. %s", e.getMessage)
+          case e: Exception => LOG.error(s"Unable to connect to the database ${e.getMessage}")
         }
 
         // Spark likes working with properties, hence we create a properties object
@@ -72,7 +78,8 @@ object Main {
 
         // NOTE
         // Spark requires a View of a table to allow for SQL queries
-        // CreateOrReplaceTempView will create a temporary view of the table in memory. It is not persistent at this moment but you can run sql query on top of that.
+        // CreateOrReplaceTempView will create a temporary view of the table in memory.
+        // It is not persistent at this moment but you can run sql queries on top of that.
         // If you want to save it you can either persist or use saveAsTable to save.
         table.createOrReplaceTempView(commandLineParameters.table)
 
@@ -83,9 +90,7 @@ object Main {
         LOG.info("Spark support has been disabled!")
 
         // connect
-        //      Class.forName("org.mariadb.jdbc.Driver")
         val connection = DriverManager.getConnection(databaseProperties.jdbcURL, databaseProperties.user, databaseProperties.password)
-        connection.isClosed
 
         // execute query
         val statement = connection.createStatement()
@@ -95,19 +100,15 @@ object Main {
         val list = Iterator.from(0).takeWhile(_ => rs.next()).map(_ => rs.getString(1)).toList
         println(list)
 
-        //      while (rs.next()) {
-        //        println(rs.getString(1)) //or rs.getString("column name");
-        //      }
-
         connection.isClosed
       }
     } catch {
-      case eie: ExceptionInInitializerError => {
+      case eie: ExceptionInInitializerError =>
         LOG.error("__________________________________________________________________________________________")
-        LOG.error("Hadoop support is possibly wrongly configured or missing! " + eie.getException.getMessage)
+        LOG.error(s"Hadoop support is possibly wrongly configured or missing! ${eie.getException.getMessage}")
         LOG.error("__________________________________________________________________________________________")
-      }
-      case e: Exception => LOG.error("Hadoop support is possibly wrongly configured or missing! " + e.getMessage)
+      case e: Exception => LOG.error(s"Hadoop support is possibly wrongly configured or missing! ${e.getMessage}")
+                           LOG.error("Don't forget to specify the name of the database driver!")
     }
 
   }
