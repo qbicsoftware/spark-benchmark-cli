@@ -72,16 +72,22 @@ object Main {
         connectionProperties.put("password", s"${databaseProperties.password}")
         connectionProperties.put("driver", s"${commandLineParameters.databaseDriver}")
 
-        val table = spark.read.jdbc(databaseProperties.jdbcURL, commandLineParameters.table, connectionProperties)
-        table.printSchema()
-        table.show()
+        val tables =  commandLineParameters.table
+
+        val dfs = for {
+          table <- tables
+        } yield (table, spark.read.jdbc(databaseProperties.jdbcURL, table, connectionProperties))
 
         // NOTE
         // Spark requires a View of a table to allow for SQL queries
         // CreateOrReplaceTempView will create a temporary view of the table in memory.
         // It is not persistent at this moment but you can run sql queries on top of that.
         // If you want to save it you can either persist or use saveAsTable to save.
-        table.createOrReplaceTempView(commandLineParameters.table)
+        for {
+          (name, df) <- dfs
+        } df.createOrReplaceTempView(name)
+
+        for (tuple <- dfs) tuple._2.printSchema()
 
         val result = spark.sql(commandLineParameters.sqlQuery)
         result.show()

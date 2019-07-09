@@ -54,6 +54,14 @@ A query can be submitted to spark via:
 /opt/spark-apps/scark-cli-1.0.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
+## Loading multiple tables for JOIN operations
+To load multiple use the ```-t``` option with an alias:    
+```
+-t "(select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id) as t"
+```
+
+This will load all required tables and allow for queries.
+
 ## Tests
 Run tests <b>inside the sbt console</b> from the root project directory using:
 ```bash
