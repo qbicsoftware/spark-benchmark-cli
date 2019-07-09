@@ -6,7 +6,7 @@ scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % "3.0.5",
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test",
   "info.picocli" % "picocli" % "3.9.6",
   "org.mariadb.jdbc" % "mariadb-java-client" % "2.4.1",
   "org.apache.spark" %% "spark-core" % "2.4.1",
