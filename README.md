@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/spark-benchmark-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/spark-benchmark-cli)
+[![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-brightgreen.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 
 # spark-benchmark-cli
 A tool for submitting SQL queries to a Spark Cluster. Various benchmarking statistics will be calculated.    
@@ -9,11 +10,11 @@ SBT assembly plugin is configured. Hence, in the project root:
 ```bash
 sbt assembly
 ```
-will build the fat jar. The result will be written to /target/$scala-version/$name-assembly-$version.jar
+will build the fat jar. The result will be written to ```/target/$scala-version/$name-assembly-$version.jar```
 
 ## Running
 ```bash
-java -jar spark-benchmark-cli-assembly-$version.jar
+java -jar scark-cli-1.0.0.jar
 ```
 
 ## Usage
@@ -34,7 +35,8 @@ SQL Queries inside Spark!
 Required parameters are:
 ```
 -c, --config=<configFilePath>
--q, --query
+-t  --table[=<table>]
+-q, --query[=<sqlQuery>]
 ```
 Queries are optionally interactive.
 You can either use ```-q``` to get a prompt for your query or supply a full query when running the tool: ```--q[=<sqlQuery>]```.
@@ -43,13 +45,13 @@ You can either use ```-q``` to get a prompt for your query or supply a full quer
 A query can be submitted to spark via:
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/spark-benchmark-cli-assembly-0.1.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t <table> -q <"query"> 
+/opt/spark-apps/scark-cli-1.0.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t <table> -q <"query"> 
 ```
 
 ## Example Query
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/spark-benchmark-cli-assembly-0.1.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
+/opt/spark-apps/scark-cli-1.0.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
 ## Tests
