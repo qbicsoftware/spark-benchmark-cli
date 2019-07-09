@@ -25,7 +25,7 @@ Benchmark Tool for evaluating the performance of a Spark Cluster. Run custom
 SQL Queries inside Spark!
   -s, --spark                run with spark support 
   -l, --local                run spark in local mode - requires -s option to be in effect
-  -t, --table[=<table>]      table to execute SQL query in, mandatory if running with spark support
+  -t, --table[=<tables>]     table to execute SQL query in, mandatory if running with spark support
   -d, --driver[=<driver>]    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory if running with spark support 
   -q, --query[=<sqlQuery>]   SQL query to execute
   -c, --config[=<configFilePath>]
@@ -54,10 +54,10 @@ A query can be submitted to spark via:
 /opt/spark-apps/scark-cli-1.0.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
-## Loading multiple tables for JOIN operations
-To load multiple use the ```-t``` option with an alias:    
+## Multiple tables
+Multiple views of tables can be created by specifying several tables with the ```-t``` option:
 ```
--t "(select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id) as t"
+-t [option_1] [option_2] ...
 ```
 
 This will load all required tables and allow for queries.
