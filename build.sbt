@@ -1,12 +1,12 @@
 name := "scark-cli"
 
-version := "1.0.0"
+version := "1.1.0"
 
 scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
-  "org.scalactic" %% "scalactic" % "3.0.5",
   "org.scalatest" %% "scalatest" % "3.0.8" % "test",
+  "org.scalactic" %% "scalactic" % "3.0.8",
   "info.picocli" % "picocli" % "3.9.6",
   "org.mariadb.jdbc" % "mariadb-java-client" % "2.4.1",
   "org.apache.spark" %% "spark-core" % "2.4.1",
