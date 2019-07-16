@@ -57,12 +57,6 @@ A query can be submitted to spark via:
 /opt/spark-apps/scark-cli-1.1.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
 ```
 
-## Multiple Tables
-Multiple views of tables can be created by specifying several tables with the ```-t``` option:
-```
--t [option_1] [option_2] ...
-```
-
 ## Complex Query
 ```
 /spark/bin/spark-submit --master spark://spark-master:7077 \
@@ -73,8 +67,6 @@ Multiple views of tables can be created by specifying several tables with the ``
 -q "select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id INNER JOIN Consequence on Variant_has_Consequence.Consequence_id = Consequence.id" \
 -d org.mariadb.jdbc.Driver
 ```
-
-This will load all required tables and allow for queries.
 
 ## Tests
 Run tests <b>inside the sbt console</b> from the root project directory using:
