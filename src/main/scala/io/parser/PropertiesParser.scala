@@ -1,14 +1,23 @@
 package io.parser
 
+import com.typesafe.scalalogging.Logger
 import core.DatabaseProperties
 
 import scala.io.Source
 
 object PropertiesParser {
 
+  val LOG = Logger("PropertiesParser")
+
   def readPropertiesFile(propertiesFileName: String): DatabaseProperties = {
     val lines = Source.fromFile(propertiesFileName).getLines.toList
     val split = for (line <- lines) yield line.split(":")
+
+    if (split.head.length <= 2) {
+      LOG.error("Malformed database URL detected! Please verify that your database URL is correct!")
+
+      throw new IllegalArgumentException("Malformed database URL")
+    }
 
     var host = split.head(1) + ":" + split.head(2) + ":" + split.head(3)
     var port = split(1)(1)
