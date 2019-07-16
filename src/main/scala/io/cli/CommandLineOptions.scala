@@ -24,8 +24,9 @@ class CommandLineOptions {
   var configFilePath = ""
 
   @Option(names = Array("-t", "--table"),
-    description = Array("Table to run query on. Required if using Spark."))
-  var table = ""
+    description = Array("Table to run query on. Required if using Spark."),
+    arity = "1..*")
+  var table = Array[String]()
 
   @Option(names = Array("-q", "--query"),
     description = Array("SQL query to execute."),
