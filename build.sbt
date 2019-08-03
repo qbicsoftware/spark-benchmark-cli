@@ -8,7 +8,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.8" % "test",
   "org.scalactic" %% "scalactic" % "3.0.8",
   "info.picocli" % "picocli" % "4.0.1",
-  "org.mariadb.jdbc" % "mariadb-java-client" % "2.4.2",
+  "org.mariadb.jdbc" % "mariadb-java-client" % "2.4.3",
   "org.apache.spark" %% "spark-core" % "2.4.1",
   "org.apache.spark" %% "spark-sql" % "2.4.1",
   "org.apache.spark" %% "spark-mllib" % "2.4.1",
