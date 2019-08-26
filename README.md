@@ -53,32 +53,33 @@ A query can be submitted to spark via:
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
 /opt/spark-apps/scark-cli-1.1.0.jar \
--s \
--d org.mariadb.jdbc.Driver \
 -c /opt/spark-data/database_properties.txt \
+-s \
 -t <table> \
--q <"query"> 
+-q <"query"> \
+-d org.mariadb.jdbc.Driver
 ```
 
 ## Example Query
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
 /opt/spark-apps/scark-cli-1.1.0.jar \
--s \
--d org.mariadb.jdbc.Driver \
 -c /opt/spark-data/database_properties.txt \
--t Consequence -q "SELECT id FROM Consequence"
+-s \
+-t Consequence Variant Variant_has_Consequence \
+-q "SELECT id FROM Consequence" \
+-d org.mariadb.jdbc.Driver
 ```
 
 ## Complex Query
 ```
 /spark/bin/spark-submit --master spark://spark-master:7077 \
 /opt/spark-apps/scark-cli-1.1.0.jar \
+-c /opt/spark-data/database_properties.txt \
 -s \
--d org.mariadb.jdbc.Driver \
--c /opt/spark-data/database_properties.txt \ 
 -t Consequence Variant Variant_has_Consequence \
--q "select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id INNER JOIN Consequence on Variant_has_Consequence.Consequence_id = Consequence.id"
+-q "select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id INNER JOIN Consequence on Variant_has_Consequence.Consequence_id = Consequence.id" \
+-d org.mariadb.jdbc.Driver
 ```
 
 ## Tests
