@@ -8,6 +8,10 @@
 A tool for submitting SQL queries to a Spark Cluster. Various benchmarking statistics will be calculated.    
 Currently MariaDB is supported out of the box.
 
+
+![ezgif com-optimize](https://user-images.githubusercontent.com/21954664/63680177-5b0bef80-c7f3-11e9-8cf6-9b754be5cf61.gif)
+
+
 ## Building
 SBT assembly plugin is configured. Hence, in the project root:
 ```bash
@@ -48,13 +52,23 @@ You can either use ```-q``` to get a prompt for your query or supply a full quer
 A query can be submitted to spark via:
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/scark-cli-1.1.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t <table> -q <"query"> 
+/opt/spark-apps/scark-cli-1.1.0.jar \
+-c /opt/spark-data/database_properties.txt \
+-s \
+-t <table> \
+-q <"query"> \
+-d org.mariadb.jdbc.Driver
 ```
 
 ## Example Query
 ```bash
 /spark/bin/spark-submit --master spark://spark-master:7077 \
-/opt/spark-apps/scark-cli-1.1.0.jar -s -d org.mariadb.jdbc.Driver -c /opt/spark-data/database_properties.txt -t Consequence -q "SELECT id FROM Consequence"
+/opt/spark-apps/scark-cli-1.1.0.jar \
+-c /opt/spark-data/database_properties.txt \
+-s \
+-t Consequence Variant Variant_has_Consequence \
+-q "SELECT id FROM Consequence" \
+-d org.mariadb.jdbc.Driver
 ```
 
 ## Complex Query
