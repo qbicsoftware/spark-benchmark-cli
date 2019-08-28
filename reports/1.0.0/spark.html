@@ -1,0 +1,129 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Spark &#8212; scark-cli 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="scark-cli" href="readme.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="scark-cli"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">scark-cli 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="spark">
+<h1>Spark<a class="headerlink" href="#spark" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-apache-spark">
+<h2>About Apache Spark<a class="headerlink" href="#about-apache-spark" title="Permalink to this headline">¶</a></h2>
+<p>Apache Spark is a unified analytics engine for large-scale data processing.
+Basically, it’s a cluster computing framework offering a stack of libraries for SQL and data frames (Spark SQL), machine learning (MLIib), graphs (GraphX) and streaming (Spark Streaming).</p>
+<img alt="Spark Overview" src="_images/spark_overview.png" />
+<p>Although, Spark is written in Scala, applications can also be submitted in Java, Python, R and SQL.
+Spark can either be run in its standalone cluster mode or on EC2, on Hadoop Yarn, Mesos or on Kubernetes.</p>
+</div>
+<div class="section" id="comparing-apache-spark-with-apache-hadoop">
+<h2>Comparing Apache Spark with Apache Hadoop<a class="headerlink" href="#comparing-apache-spark-with-apache-hadoop" title="Permalink to this headline">¶</a></h2>
+<p>Apache Spark differs from Apache Hadoop in their different approaches to processing.
+Spark is able to do it in-memory, whereas Hadoop’s MapReduce has to read from and write to a disk.
+As a result, the processing speed differs significantly. Commonly, Spark is said to be up to 100 times faster.</p>
+<p>However, the volume of data processed also differs: Hadoop’s MapReduce is able to work with far larger datasets than Spark.
+Incase the dataset is larger than available RAM, Hadoop MapReduce may outperform Spark. Due to Hadoop’s worse performance, it should only be used if no immediate results are expected e.g. if processing can be done overnight.
+Spark’s iterative processing approach is especially useful, when data is processed multiple times.
+Spark’s Resilient Distributed Datasets (RDDs) enable multiple map operations in memory, while Hadoop MapReduce has to write interim results to a disk.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Spark</a><ul>
+<li><a class="reference internal" href="#about-apache-spark">About Apache Spark</a></li>
+<li><a class="reference internal" href="#comparing-apache-spark-with-apache-hadoop">Comparing Apache Spark with Apache Hadoop</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readme.html"
+                        title="previous chapter">scark-cli</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/spark.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="scark-cli"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">scark-cli 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Lukas Heumos.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>

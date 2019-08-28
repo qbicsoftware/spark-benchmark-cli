@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Usage &#8212; scark-cli 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Known issues" href="known_issues.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="known_issues.html" title="Known issues"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">scark-cli 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>The following sections will guide you through running scark-cli, all possible parameter options and submitting SQL queries to Spark networks.</p>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>java -jar scark-cli-1.1.0.jar
+</pre></div>
+</div>
+<p>You should now see the help menu.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage: Benchmark <span class="o">[</span>-h<span class="o">]</span> -q<span class="o">[=</span>&lt;sqlQuery&gt;<span class="o">]</span> -c<span class="o">=</span>&lt;configFilePath&gt;
+Benchmark Tool <span class="k">for</span> evaluating the performance of a Spark Cluster. Run custom
+SQL Queries inside Spark!
+-s, --spark                run with spark support
+-l, --local                run spark in <span class="nb">local</span> mode - requires -s option to be in effect
+-t, --table<span class="o">[=</span>&lt;tables&gt;<span class="o">]</span>     list of tables to execute SQL query in, mandatory <span class="k">if</span> running with spark support
+-d, --driver<span class="o">[=</span>&lt;driver&gt;<span class="o">]</span>    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory <span class="k">if</span> running with spark support
+-q, --query<span class="o">[=</span>&lt;sqlQuery&gt;<span class="o">]</span>   SQL query to execute
+- c, --config<span class="o">[=</span>&lt;configFilePath&gt;<span class="o">]</span>
+                         database config file path
+-h, --help                 display a <span class="nb">help</span> message
+</pre></div>
+</div>
+<p>Required parameters are:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-c, --config<span class="o">=</span>&lt;configFilePath&gt;
+-t  --table<span class="o">[=</span>&lt;table&gt;<span class="o">]</span>
+-q, --query<span class="o">[=</span>&lt;sqlQuery&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Queries are optionally interactive.
+You can either use <code class="code docutils literal notranslate"><span class="pre">-q</span></code> to get a prompt for your query or supply a full query when running the tool: <code class="code docutils literal notranslate"><span class="pre">--q[=&lt;sqlQuery&gt;]</span></code>.</p>
+</div>
+<div class="section" id="spark">
+<h2>Spark<a class="headerlink" href="#spark" title="Permalink to this headline">¶</a></h2>
+<p>A query can be submitted to spark via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 <span class="se">\</span>
+/opt/spark-apps/scark-cli-1.1.0.jar <span class="se">\</span>
+-c /opt/spark-data/database_properties.txt <span class="se">\</span>
+-s <span class="se">\</span>
+-t &lt;table&gt; <span class="se">\</span>
+-q &lt;<span class="s2">&quot;query&quot;</span>&gt; <span class="se">\</span>
+-d org.mariadb.jdbc.Driver
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-query">
+<h2>Example Query<a class="headerlink" href="#example-query" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 <span class="se">\</span>
+/opt/spark-apps/scark-cli-1.1.0.jar <span class="se">\</span>
+-c /opt/spark-data/database_properties.txt <span class="se">\</span>
+-s <span class="se">\</span>
+-t Consequence <span class="se">\</span>
+-q <span class="s2">&quot;SELECT id FROM Consequence&quot;</span> <span class="se">\</span>
+-d org.mariadb.jdbc.Driver
+</pre></div>
+</div>
+</div>
+<div class="section" id="complex-query">
+<h2>Complex Query<a class="headerlink" href="#complex-query" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/spark/bin/spark-submit --master spark://spark-master:7077 <span class="se">\</span>
+/opt/spark-apps/scark-cli-1.1.0.jar <span class="se">\</span>
+-c /opt/spark-data/database_properties.txt <span class="se">\</span>
+-s <span class="se">\</span>
+-t Consequence Variant Variant_has_Consequence <span class="se">\</span>
+-q <span class="s2">&quot;select * from Variant INNER JOIN Variant_has_Consequence ON Variant.id = Variant_has_Consequence.Variant_id INNER JOIN Consequence on Variant_has_Consequence.Consequence_id = Consequence.id&quot;</span> <span class="se">\</span>
+-d org.mariadb.jdbc.Driver
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#spark">Spark</a></li>
+<li><a class="reference internal" href="#example-query">Example Query</a></li>
+<li><a class="reference internal" href="#complex-query">Complex Query</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="known_issues.html"
+                        title="next chapter">Known issues</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="known_issues.html" title="Known issues"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">scark-cli 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Lukas Heumos.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>

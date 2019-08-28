@@ -1,5 +1,0 @@
-host: somewrongurl
-port: 8080
-name: "oncostore"
-pw: supersecurepassword
-user: "oncoloader"
