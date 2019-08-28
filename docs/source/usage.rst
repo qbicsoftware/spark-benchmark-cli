@@ -20,10 +20,10 @@ Options
     Usage: Benchmark [-h] -q[=<sqlQuery>] -c=<configFilePath>
     Benchmark Tool for evaluating the performance of a Spark Cluster. Run custom
     SQL Queries inside Spark!
-    -s, --spark                run with spark support 
+    -s, --spark                run with spark support
     -l, --local                run spark in local mode - requires -s option to be in effect
     -t, --table[=<tables>]     list of tables to execute SQL query in, mandatory if running with spark support
-    -d, --driver[=<driver>]    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory if running with spark support 
+    -d, --driver[=<driver>]    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory if running with spark support
     -q, --query[=<sqlQuery>]   SQL query to execute
     - c, --config[=<configFilePath>]
                              database config file path
@@ -44,6 +44,8 @@ You can either use :code:`-q` to get a prompt for your query or supply a full qu
 Spark
 -----
 
+*Note* that for scark-cli to be run inside a containerized spark network, such as one set up by `spark-service <https://github.com/qbicsoftware/spark-service>`_,
+ it has to be available in the container. Refer to the documentation of your spark container about how to mount volumes and provide access to scark-cli.
 A query can be submitted to spark via:
 
 .. code-block:: bash
