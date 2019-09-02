@@ -25,8 +25,8 @@ Options
     -t, --table[=<tables>]     list of tables to execute SQL query in, mandatory if running with spark support
     -d, --driver[=<driver>]    driver to access Database, e.g. org.mariadb.jdbc.Driver, mandatory if running with spark support
     -q, --query[=<sqlQuery>]   SQL query to execute
-    - c, --config[=<configFilePath>]
-                             database config file path
+    -c, --config[=<configFilePath>]
+                               database config file path
     -h, --help                 display a help message
 
 Required parameters are:
@@ -40,12 +40,27 @@ Required parameters are:
 Queries are optionally interactive.
 You can either use :code:`-q` to get a prompt for your query or supply a full query when running the tool: :code:`--q[=<sqlQuery>]`.
 
+Configuration file
+------------------
+
+The configuration file should look as follows:
+
+host: jdbc:mysql://<URL>/<database>
+
+port: "<port>"
+
+name: "<database>"
+
+pw: "<password>"
+
+user: "<username>"
 
 Spark
 -----
 
-*Note* that for scark-cli to be run inside a containerized spark network, such as one set up by `spark-service <https://github.com/qbicsoftware/spark-service>`_,
- it has to be available in the container. Refer to the documentation of your spark container about how to mount volumes and provide access to scark-cli.
+*Note* that for scark-cli to be run inside a containerized spark network, such as one set up by `spark-service <https://github.com/qbicsoftware/spark-service>`_, it has to be available in the container.
+
+Refer to the documentation of your spark container about how to mount volumes and provide access to scark-cli.
 A query can be submitted to spark via:
 
 .. code-block:: bash
