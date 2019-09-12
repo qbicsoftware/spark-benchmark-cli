@@ -30,7 +30,7 @@ Features
 Documentation
 -------------
 
-The documentation for scark-cli is hosted `here <https://readthedocs.org/projects/scark-cli>`_.
+The documentation for scark-cli is hosted `here <https://scark-cli.readthedocs.io/en/latest>`_.
 
 Authors
 -------
