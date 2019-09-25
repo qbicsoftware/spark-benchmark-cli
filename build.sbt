@@ -9,10 +9,10 @@ libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % "3.0.8",
   "info.picocli" % "picocli" % "4.0.4",
   "org.mariadb.jdbc" % "mariadb-java-client" % "2.4.3",
-  "org.apache.spark" %% "spark-core" % "2.4.1",
-  "org.apache.spark" %% "spark-sql" % "2.4.1",
-  "org.apache.spark" %% "spark-mllib" % "2.4.1",
-  "org.apache.spark" %% "spark-streaming" % "2.4.1",
+  "org.apache.spark" %% "spark-core" % "2.4.4",
+  "org.apache.spark" %% "spark-sql" % "2.4.4",
+  "org.apache.spark" %% "spark-mllib" % "2.4.4",
+  "org.apache.spark" %% "spark-streaming" % "2.4.4",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 )
 
