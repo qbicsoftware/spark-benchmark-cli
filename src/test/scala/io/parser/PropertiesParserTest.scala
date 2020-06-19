@@ -1,8 +1,8 @@
 package io.parser
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class PropertiesParserTest extends FunSuite{
+class PropertiesParserTest extends AnyFunSuite{
   val DATABASE_PROPERTIES_TEST_GOOD: String = getClass.getResource("/database_properties_test_good.txt").getPath
   val DATABASE_PROPERTIES_TEST_BAD: String = getClass.getResource("/database_properties_test_bad.txt").getPath
 
