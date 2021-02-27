@@ -2,7 +2,7 @@ name := "scark-cli"
 
 version := "1.1.0"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.12.13"
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.8" % "test",
